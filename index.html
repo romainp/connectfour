@@ -11,15 +11,15 @@
 <script >
     var grid = new Array(7);
     $(document).ready(function() {
-        //Generating the grid
         var turn = 0; //0 -> red, 1 -> blue
-        
+        //Generating the grid table to keep track of the pieces. e means empty. 0 for red, 1 for blue
         for (var j=6;j>=0;j--){
             grid[j] = new Array(6);
             for(var i = 0; i<=5;i++){
                 grid[j][i] = 'e'; //e for empty
             }
         }
+        //generating the grid in the window. Each grid cell has an ID made of ColumnRow
         for (var j=5;j>=0;j--){
             for(var i = 0; i<=6;i++){
                 $('#grid').append("<div class='cell' id='".concat(i).concat(j).concat("''></div>"));
@@ -28,7 +28,7 @@
         $('.cell').click(function(){
             var cell = $(this).attr('id')
             var cellID = '#'.concat(cell);
-            var column = parseInt(cell/10);
+            var column = parseInt(cell/10); //Dividing by 10 gives the column number
             var row = -1;
             for (var i = 0;i<=5;i++){
                 if (grid[column][i]=='e'){
@@ -47,8 +47,8 @@
                 else{
                     window.alert("Error with the players turns");
                 }
-                turn = (turn + 1 )%2;
-                var win = check_win();
+                turn = (turn + 1 )%2;//adding 1 and taking the modulo gives 1 or 0, and changes turn. 
+                var win = check_win();//check if there is any win on the grid
                 if (win != -1){
                     if (win==0){
                         window.alert("the RED won");
@@ -66,7 +66,7 @@
                 if(grid[j][i]!='e'){
                     var player = grid[j][i];
                     if (grid[j+3] != null){//if the last one is out of bound, no need to check at all
-                         if (grid[j+3][i] != null){
+                         if (grid[j+3][i] != null){//need to check in two steps in case the cloumn number is out of bound
                             if(grid[j+1][i] == player){//check horizontally
                                 if (grid[j+2][i] == player){
                                     if (grid[j+3][i] == player){
@@ -88,7 +88,7 @@
                         }
                     }
                     if (grid[j-3]!=null){//if the last one is out of bound, no need to check at all
-                        if (grid[j-3][i+3]!=null){//if the last one is out of bound, no need to check at all
+                        if (grid[j-3][i+3]!=null){//here we need to check in two steps in case the cloumn number is out of bound
                             if(grid[j-1][i+1] == player){//check diagonal left
                                 if (grid[j-2][i+2] == player){
                                     if (grid[j-3][i+3] == player){
@@ -100,7 +100,7 @@
                         }
                     }
                     if (grid[j+3]!=null){//if the last one is out of bound, no need to check at all
-                        if (grid[j+3][i+3]!=null){//if the last one is out of bound, no need to check at all
+                        if (grid[j+3][i+3]!=null){//here we need to check in two steps in case the cloumn number is out of bound
                             if(grid[j+1][i+1] == player){//check diagonal right
                                 if (grid[j+2][i+2] == player){
                                     if (grid[j+3][i+3] == player){
@@ -114,8 +114,6 @@
                 }
             }
         }
-
-
         return -1;
     }
    
