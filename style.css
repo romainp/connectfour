@@ -1,0 +1,35 @@
+.cell{
+	width:30px;
+	height:30px;
+	display:block;
+	float:left;
+	border-left:1px solid black;
+	border-bottom:1px solid black;
+
+
+}
+.cell:nth-child(7n){
+		border-right:1px solid black;
+}
+.cell:nth-child(-n+7){
+		border-top:1px solid black;
+}
+#grid{
+	width:220px;
+	display: block;
+	float:left;
+}
+.red{
+	width:28px;
+	height:28px;
+	margin:1px;
+	border-radius:14px;
+	background: red;
+}
+.blue{
+	width:28px;
+	height:28px;
+	margin:1px;
+	border-radius:14px;
+	background: blue;
+}
